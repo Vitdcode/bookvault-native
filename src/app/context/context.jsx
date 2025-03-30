@@ -3,7 +3,7 @@ import React, { createContext, useState, useContext, ReactNode } from "react";
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  const [searchInput, setSearchInput] = useState("hello");
+  const [searchInput, setSearchInput] = useState("");
   const [fetchedBooks, setFetchedBooks] = useState([]);
 
   return (

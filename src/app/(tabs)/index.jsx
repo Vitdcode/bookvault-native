@@ -1,19 +1,13 @@
+import { useState } from "react";
 import { Text, View } from "react-native";
-import { Button } from "react-native-paper";
+import { TextInput } from "react-native-paper";
 
 export default function SearchScreen() {
+  const [input, setInput] = useState("");
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <View style={{}}>
+      <TextInput label="Search Book" value={input} onChangeText={setInput} />
       <Text>Edit app/index.tsx to edit this screen.</Text>
-      <Button icon="search" mode="contained">
-        Hello World
-      </Button>
     </View>
   );
 }

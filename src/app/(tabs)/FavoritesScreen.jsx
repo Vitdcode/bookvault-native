@@ -1,6 +1,8 @@
 import { Text, View } from "react-native";
+import { useAppContext } from "../context/context";
 
 export default function FavoritesScreen() {
+  const { searchInput } = useAppContext();
   return (
     <View
       style={{
@@ -9,7 +11,7 @@ export default function FavoritesScreen() {
         alignItems: "center",
       }}
     >
-      <Text>Favorites</Text>
+      <Text>{searchInput}</Text>
     </View>
   );
 }

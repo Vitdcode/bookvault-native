@@ -1,4 +1,5 @@
 import { Stack } from "expo-router";
+import { AppProvider } from "./context/context";
 import {
   NavigationContainer,
   DarkTheme as NavigationDarkTheme,
@@ -35,17 +36,19 @@ export default function RootLayout() {
   return (
     <PaperProvider theme={paperTheme}>
       <ThemeProvider value={paperTheme}>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false, title: "Home Screen" }} />
-        </Stack>
-        <StatusBar
-          style={colorScheme === "dark" ? "light" : "dark"} // Dynamically set style
-          backgroundColor={
-            colorScheme === "dark"
-              ? Colors.dark.secondary // Use your dark theme background
-              : Colors.light.secondary // Use your light theme background
-          }
-        />
+        <AppProvider>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false, title: "Home Screen" }} />
+          </Stack>
+          <StatusBar
+            style={colorScheme === "dark" ? "light" : "dark"} // Dynamically set style
+            backgroundColor={
+              colorScheme === "dark"
+                ? Colors.dark.secondary // Use your dark theme background
+                : Colors.light.secondary // Use your light theme background
+            }
+          />
+        </AppProvider>
       </ThemeProvider>
     </PaperProvider>
   );

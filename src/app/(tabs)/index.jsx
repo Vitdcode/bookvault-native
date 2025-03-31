@@ -3,6 +3,7 @@ import { TextInput, Text, TouchableRipple } from "react-native-paper";
 import { useAppContext } from "../context/context";
 import handleFetch from "../functional functions_components/fetchBooks";
 import { View, ScrollView, Image, TouchableOpacity } from "react-native";
+import { useRouter } from "expo-router";
 
 export default function SearchScreen() {
   const { searchInput, setSearchInput, fetchedBooks, setFetchedBooks } = useAppContext();
@@ -11,6 +12,8 @@ export default function SearchScreen() {
     const books = await handleFetch(searchInput);
     setFetchedBooks(books);
   };
+
+  const router = useRouter();
 
   return (
     <View>
@@ -24,10 +27,11 @@ export default function SearchScreen() {
       <ScrollView style={{ marginBottom: 150 }}>
         {fetchedBooks.map((book) => (
           <TouchableRipple
-            onPress={() => console.log("Pressed")}
+            onPress={() => router.push(`/book/${book.googleBooksId}`)}
             rippleColor="rgba(214, 214, 214, 0.32)"
+            key={book.googleBooksId}
           >
-            <View key={book.googleBooksId} style={{ padding: 20, flexDirection: "row", gap: 10 }}>
+            <View style={{ padding: 20, flexDirection: "row", gap: 10 }}>
               <Image
                 source={{ uri: book.coverUrl }}
                 resizeMethod="contain"

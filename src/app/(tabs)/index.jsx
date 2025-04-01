@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TextInput, Text, TouchableRipple } from "react-native-paper";
+import { TextInput, Text, TouchableRipple, Searchbar } from "react-native-paper";
 import { useAppContext } from "../context/context";
 import handleFetch from "../functional functions_components/fetchBooks";
 import { View, ScrollView, Image, TouchableOpacity } from "react-native";
@@ -7,6 +7,8 @@ import { useRouter } from "expo-router";
 
 export default function SearchScreen() {
   const { searchInput, setSearchInput, fetchedBooks, setFetchedBooks } = useAppContext();
+
+  /*   const theme = useTheme(); */
 
   const fetchBooks = async () => {
     const books = await handleFetch(searchInput);
@@ -18,6 +20,7 @@ export default function SearchScreen() {
   return (
     <View>
       <TextInput
+        rippleColor={theme}
         label="Search Book"
         value={searchInput}
         onChangeText={setSearchInput}

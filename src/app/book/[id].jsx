@@ -1,15 +1,17 @@
-import { View, ScrollView, Image } from "react-native";
+import { View, ScrollView, Image, TouchableOpacity } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { useAppContext } from "../context/context";
-import { Text, Button, Icon } from "react-native-paper";
+import { Text, Button, Icon, Card, useTheme, Portal } from "react-native-paper";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import CompletedButton from "../components/animatedButtons/CompletedButton";
 import FavoriteButton from "../components/animatedButtons/FavoriteButton";
 import AnimateIcons from "../components/animatedButtons/AnaimateBetweenIcons";
 import BookMarkButton from "../components/animatedButtons/BookmarkButton";
-import { useTheme } from "react-native-paper";
 import { Stack } from "expo-router";
+import { useRef, useState } from "react";
+import { Animated, Easing } from "react-native";
+import Fab from "../components/Fab";
 
 const Bookpage = () => {
   const theme = useTheme();
@@ -42,7 +44,14 @@ const Bookpage = () => {
       />
       <ScrollView>
         {/* book details section */}
-        <View style={{ flexDirection: "row", padding: 40, gap: 20, marginBottom: 10 }}>
+        <View
+          style={{
+            flexDirection: "row",
+            padding: 40,
+            gap: 20,
+            marginBottom: 10,
+          }}
+        >
           <Image
             source={{ uri: book.coverUrl }}
             resizeMethod="contain"
@@ -74,31 +83,49 @@ const Bookpage = () => {
         {/* buttons section */}
         <View
           style={{
+            flexDirection: "row",
             gap: 30,
-            alignItems: "flex-end",
+            justifyContent: "flex-end",
+            alignItems: "center",
             marginRight: 20,
           }}
         >
+          <FavoriteButton />
+          <BookMarkButton />
           <CompletedButton />
-          <View
-            style={{
-              flexDirection: "row",
-              marginLeft: "auto",
-              marginRight: 25,
-              alignItems: "center",
-              justifyContent: "center",
-              width: "30%",
-              gap: 20,
-              backgroundColor: "#e8e8e8",
-              borderRadius: 10,
-              padding: 10,
-              /*    elevation: 1, */
-            }}
-          >
-            <FavoriteButton />
-            <BookMarkButton />
-          </View>
         </View>
+
+        <Card
+          style={{
+            width: "95%",
+            marginHorizontal: "auto",
+            marginBlock: 20,
+          }}
+        >
+          <Card.Content>
+            <Text variant="titleLarge" style={{ marginBottom: 10 }}>
+              review
+            </Text>
+            <Text variant="bodyMedium">This will be a review</Text>
+          </Card.Content>
+        </Card>
+
+        <Card
+          style={{
+            width: "95%",
+            marginHorizontal: "auto",
+            marginTop: 20,
+            marginBottom: 90,
+          }}
+        >
+          <Card.Content>
+            <Text variant="titleLarge" style={{ marginBottom: 10 }}>
+              Description
+            </Text>
+            <Text variant="bodyMedium">{book.description}</Text>
+          </Card.Content>
+        </Card>
+        <Fab book={book} />
       </ScrollView>
     </>
   );

@@ -5,9 +5,25 @@ const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [searchInput, setSearchInput] = useState("");
   const [fetchedBooks, setFetchedBooks] = useState([]);
+  const [isLiked, setIsLiked] = React.useState(false); //TODO - replace later with live data
+  const [isBookmarked, setIsBookmarked] = React.useState(false);
+  const [review, setReview] = useState("");
 
   return (
-    <AppContext.Provider value={{ searchInput, setSearchInput, fetchedBooks, setFetchedBooks }}>
+    <AppContext.Provider
+      value={{
+        searchInput,
+        setSearchInput,
+        fetchedBooks,
+        setFetchedBooks,
+        isLiked,
+        setIsLiked,
+        isBookmarked,
+        setIsBookmarked,
+        review,
+        setReview,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

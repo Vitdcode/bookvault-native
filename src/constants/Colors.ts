@@ -10,6 +10,7 @@ const Colors = {
   light: {
     primary: "rgb(0, 107, 94)",
     onPrimary: "rgb(255, 255, 255)",
+    gray: "#3b3b3b",
     primaryContainer: "rgb(118, 248, 226)",
     onPrimaryContainer: "rgb(0, 32, 27)",
     secondary: "rgb(149, 195, 166)",
@@ -52,6 +53,7 @@ const Colors = {
   dark: {
     primary: "rgb(85, 219, 198)",
     onPrimary: "rgb(0, 55, 48)",
+    gray: "#999999",
     primaryContainer: "rgb(0, 80, 71)",
     onPrimaryContainer: "rgb(118, 248, 226)",
     secondary: "rgb(149, 195, 166)",

@@ -12,11 +12,15 @@ import { Stack } from "expo-router";
 import { useRef, useState } from "react";
 import { Animated, Easing } from "react-native";
 import Fab from "../components/Fab";
+import ReviewButton from "../components/animatedButtons/ReviewButton";
 
 const Bookpage = () => {
   const theme = useTheme();
   const { id } = useLocalSearchParams();
   const { fetchedBooks } = useAppContext();
+
+  const { isLiked, setIsLiked } = useAppContext();
+  const { isBookmarked, setIsBookmarked } = useAppContext();
 
   const book = fetchedBooks.find((b) => b.googleBooksId === id);
 
@@ -48,33 +52,76 @@ const Bookpage = () => {
           style={{
             flexDirection: "row",
             padding: 40,
-            gap: 20,
+            gap: 40,
             marginBottom: 10,
           }}
         >
-          <Image
-            source={{ uri: book.coverUrl }}
-            resizeMethod="contain"
-            style={{
-              height: 250,
-              width: 160,
-              borderRadius: 5,
-              elevation: 10,
-            }}
-          />
-          <View style={{ width: "60%", justifyContent: "space-between", gap: 10 }}>
-            <Text variant="titleLarge" style={{ fontWeight: "bold" }}>
+          <View>
+            <Image
+              source={{ uri: book.coverUrl }}
+              resizeMethod="contain"
+              style={{
+                height: 250,
+                width: 160,
+                borderRadius: 5,
+                elevation: 10,
+              }}
+            />
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                gap: 20,
+                marginTop: 10,
+                borderRadius: 10,
+                borderBlockColor: "black",
+              }}
+            >
+              {isBookmarked ? (
+                <MaterialIcons
+                  name="bookmark"
+                  size={30}
+                  color={theme.colors.secondary}
+                  onPress={() => setIsBookmarked(!isBookmarked)}
+                />
+              ) : (
+                <MaterialIcons
+                  name="bookmark-border"
+                  size={30}
+                  color={theme.colors.gray}
+                  onPress={() => setIsBookmarked(!isBookmarked)}
+                />
+              )}
+              {isLiked ? (
+                <MaterialIcons
+                  name="thumb-up"
+                  size={30}
+                  color={theme.colors.secondary}
+                  onPress={() => setIsLiked(!isLiked)}
+                />
+              ) : (
+                <MaterialIcons
+                  name="thumb-up-off-alt"
+                  size={30}
+                  color={theme.colors.gray}
+                  onPress={() => setIsLiked(!isLiked)}
+                />
+              )}
+            </View>
+          </View>
+          <View style={{ width: "60%", gap: 10 }}>
+            <Text variant="titleLarge" style={{ fontWeight: "bold", color: theme.colors.gray }}>
               {book.title}
             </Text>
-            <Text variant="bodyLarge" style={{ color: "gray" }}>
+            <Text variant="bodyLarge" style={{ color: theme.colors.gray }}>
               Author: {book.authors.join(", ")}
             </Text>
-            <Text variant="bodyLarge" style={{ color: "gray" }}>
+            <Text variant="bodyLarge" style={{ color: theme.colors.gray }}>
               Published: {convertToMetricDate(book.publishedDate)}
             </Text>
             <View style={{ flexDirection: "row", alignItems: "center", gap: "10" }}>
               <FontAwesome5 name="book" size={20} color="#rgb(150, 197, 168)" />
-              <Text variant="bodyLarge" style={{ color: "gray" }}>
+              <Text variant="bodyLarge" style={{ color: theme.colors.gray }}>
                 {book.pageCount} pages
               </Text>
             </View>
@@ -85,13 +132,11 @@ const Bookpage = () => {
           style={{
             flexDirection: "row",
             gap: 30,
-            justifyContent: "flex-end",
+            justifyContent: "center",
             alignItems: "center",
-            marginRight: 20,
           }}
         >
-          <FavoriteButton />
-          <BookMarkButton />
+          <ReviewButton />
           <CompletedButton />
         </View>
 

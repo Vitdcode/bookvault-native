@@ -1,14 +1,27 @@
+import { useAppContext } from "../../context/context";
+import { MaterialIcons } from "@expo/vector-icons";
+import toggleProperty from "../../functional functions_components/toggleProperty";
+import { useTheme } from "react-native-paper";
+import { useRouter } from "expo-router";
 import { Button, Icon } from "react-native-paper";
 import { Animated, Easing } from "react-native"; // Import Animated and Easing
 import { useState, useRef } from "react";
 
-const CompletedButton = () => {
-  const [isPressed, setIsPressed] = useState(false); // Track button press
+const AddToCompleted = ({ bookData }) => {
+  const router = useRouter();
+  const theme = useTheme();
+  const { books, setBooks } = useAppContext();
+  const isCompleted =
+    books.find((book) => book.googleBooksId === bookData.googleBooksId)?.isCompleted || false;
+
+  const handleCompletedToggle = () => {
+    toggleProperty(books, setBooks, bookData, "isCompleted", "isBookmarked", "isFavorite", router);
+  };
+
   const animationValue = useRef(new Animated.Value(0)).current; // Animation value (0 to 1)
 
   // Animation function
   const startAnimation = () => {
-    setIsPressed(!isPressed); // Show icon
     Animated.timing(animationValue, {
       toValue: 1, // Animate to full opacity/scale
       duration: 300, // 300ms duration
@@ -25,10 +38,13 @@ const CompletedButton = () => {
     <Button
       mode="contained-tonal"
       buttonColor="rgb(151, 196, 168)"
-      onPress={startAnimation} // Trigger animation on press
+      onPress={() => {
+        startAnimation();
+        handleCompletedToggle();
+      }}
       icon={
         ({ size, color }) =>
-          isPressed ? ( // Only show icon after press
+          isCompleted ? ( // Only show icon after press
             <Animated.View
               style={{
                 opacity: animationValue, // Fade in
@@ -58,9 +74,9 @@ const CompletedButton = () => {
         fontSize: 15,
       }}
     >
-      {!isPressed ? "Mark completed" : "Book completed"}
+      {!isCompleted ? "Mark completed" : "Book completed"}
     </Button>
   );
 };
 
-export default CompletedButton;
+export default AddToCompleted;

@@ -4,7 +4,6 @@ import { useAppContext } from "../context/context";
 import { Text, Button, Icon, Card, useTheme, Portal } from "react-native-paper";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import CompletedButton from "../components/animatedButtons/CompletedButton";
 import FavoriteButton from "../components/animatedButtons/FavoriteButton";
 import AnimateIcons from "../components/animatedButtons/AnaimateBetweenIcons";
 import BookMarkButton from "../components/animatedButtons/BookmarkButton";
@@ -15,6 +14,7 @@ import Fab from "../components/Fab";
 import ReviewButton from "../components/animatedButtons/ReviewButton";
 import AddToFavorites from "../components/functional components/AddToFavorites";
 import AddToBookmarks from "../components/functional components/AddToBookmarks";
+import AddToCompleted from "../components/functional components/AddToCompleted";
 
 const Bookpage = () => {
   const theme = useTheme();
@@ -119,7 +119,7 @@ const Bookpage = () => {
           }}
         >
           <ReviewButton />
-          <CompletedButton />
+          <AddToCompleted bookData={book} />
         </View>
 
         <Card

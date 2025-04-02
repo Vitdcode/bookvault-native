@@ -48,85 +48,96 @@ const Bookpage = () => {
       />
       <ScrollView>
         {/* book details section */}
-        <View
+        <Card
           style={{
-            flexDirection: "row",
-            padding: 40,
-            gap: 40,
-            marginBottom: 10,
+            borderRadius: 20,
+            width: "95%",
+            marginHorizontal: "auto",
+            marginBlock: 20,
           }}
         >
-          <View>
-            <Image
-              source={{ uri: book.coverUrl }}
-              resizeMethod="contain"
-              style={{
-                height: 250,
-                width: 160,
-                borderRadius: 5,
-                elevation: 10,
-              }}
-            />
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                gap: 20,
-                marginTop: 10,
-                borderRadius: 10,
-                borderBlockColor: "black",
-              }}
-            >
-              {isBookmarked ? (
-                <MaterialIcons
-                  name="bookmark"
-                  size={30}
-                  color={theme.colors.secondary}
-                  onPress={() => setIsBookmarked(!isBookmarked)}
-                />
-              ) : (
-                <MaterialIcons
-                  name="bookmark-border"
-                  size={30}
-                  color={theme.colors.gray}
-                  onPress={() => setIsBookmarked(!isBookmarked)}
-                />
-              )}
-              {isLiked ? (
-                <MaterialIcons
-                  name="thumb-up"
-                  size={30}
-                  color={theme.colors.secondary}
-                  onPress={() => setIsLiked(!isLiked)}
-                />
-              ) : (
-                <MaterialIcons
-                  name="thumb-up-off-alt"
-                  size={30}
-                  color={theme.colors.gray}
-                  onPress={() => setIsLiked(!isLiked)}
-                />
-              )}
+          <Card.Content style={{ flexDirection: "row", gap: 40 }}>
+            <View style={{}}>
+              <Image
+                source={{ uri: book.coverUrl }}
+                resizeMethod="contain"
+                style={{
+                  height: 250,
+                  width: 160,
+                  borderRadius: 10,
+                  elevation: 10,
+                  borderWidth: 2,
+                  borderColor: "white",
+                }}
+              />
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  gap: 20,
+                  marginTop: 10,
+                  borderRadius: 10,
+                  padding: 3,
+                  borderWidth: 2,
+                  borderColor: "white",
+                  backgroundColor: theme.colors.secondary,
+                }}
+              >
+                {isBookmarked ? (
+                  <MaterialIcons
+                    name="bookmark"
+                    size={30}
+                    color={theme.colors.blue}
+                    onPress={() => setIsBookmarked(!isBookmarked)}
+                  />
+                ) : (
+                  <MaterialIcons
+                    name="bookmark-border"
+                    size={30}
+                    onPress={() => setIsBookmarked(!isBookmarked)}
+                  />
+                )}
+                {isLiked ? (
+                  <MaterialIcons
+                    name="thumb-up"
+                    size={30}
+                    color={theme.colors.blue}
+                    onPress={() => setIsLiked(!isLiked)}
+                  />
+                ) : (
+                  <MaterialIcons
+                    name="thumb-up-off-alt"
+                    size={30}
+                    onPress={() => setIsLiked(!isLiked)}
+                  />
+                )}
+              </View>
             </View>
-          </View>
-          <View style={{ width: "60%", gap: 10 }}>
-            <Text variant="titleLarge" style={{ fontWeight: "bold", color: theme.colors.gray }}>
-              {book.title}
-            </Text>
-            <Text variant="bodyLarge" style={{ color: theme.colors.gray }}>
-              Author: {book.authors.join(", ")}
-            </Text>
-            <Text variant="bodyLarge" style={{ color: theme.colors.gray }}>
-              Published: {convertToMetricDate(book.publishedDate)}
-            </Text>
-            <View style={{ flexDirection: "row", alignItems: "center", gap: "10" }}>
-              <FontAwesome5 name="book" size={20} color="#rgb(150, 197, 168)" />
-              <Text variant="bodyLarge" style={{ color: theme.colors.gray }}>
-                {book.pageCount} pages
+            <View style={{ width: "50%", gap: 10 }}>
+              <Text variant="titleLarge" style={{ fontWeight: "bold", color: theme.colors.gray }}>
+                {book.title}
               </Text>
+              <View style={{ flexDirection: "row", alignItems: "center", gap: "10" }}>
+                <MaterialIcons name="person" size={24} color={theme.colors.blue} />
+                <Text variant="bodyLarge" style={{ color: theme.colors.gray }}>
+                  {book.authors.join(", ")}
+                </Text>
+              </View>
+              <View style={{ flexDirection: "row", alignItems: "center", gap: "10" }}>
+                <MaterialIcons name="calendar-month" size={24} color={theme.colors.blue} />
+                <Text variant="bodyLarge" style={{ color: theme.colors.gray }}>
+                  {convertToMetricDate(book.publishedDate)}
+                </Text>
+              </View>
+              <View style={{ flexDirection: "row", alignItems: "center", gap: "10" }}>
+                <MaterialIcons name="menu-book" size={24} color={theme.colors.blue} />
+                <Text variant="bodyLarge" style={{ color: theme.colors.gray }}>
+                  {book.pageCount} pages
+                </Text>
+              </View>
             </View>
-          </View>
-        </View>
+          </Card.Content>
+        </Card>
         {/* buttons section */}
         <View
           style={{

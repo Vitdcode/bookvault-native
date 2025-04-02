@@ -51,6 +51,8 @@ const CompletedButton = () => {
         padding: 6,
         justifyContent: "center",
         borderRadius: 10,
+        borderWidth: 2,
+        borderColor: "white",
       }}
       labelStyle={{
         fontSize: 15,

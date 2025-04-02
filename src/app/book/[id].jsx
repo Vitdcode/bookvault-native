@@ -13,17 +13,17 @@ import { useRef, useState } from "react";
 import { Animated, Easing } from "react-native";
 import Fab from "../components/Fab";
 import ReviewButton from "../components/animatedButtons/ReviewButton";
+import AddToFavorites from "../components/functional components/AddToFavorites";
 
 const Bookpage = () => {
   const theme = useTheme();
   const { id } = useLocalSearchParams();
-  const { fetchedBooks } = useAppContext();
-
-  const { isLiked, setIsLiked } = useAppContext();
+  const { fetchedBooks, books } = useAppContext();
   const { isBookmarked, setIsBookmarked } = useAppContext();
 
-  const book = fetchedBooks.find((b) => b.googleBooksId === id);
-
+  const book =
+    books.find((b) => b.googleBooksId == id) || fetchedBooks.find((b) => b.googleBooksId === id);
+  if (!book) return;
   function convertToMetricDate(americanDate) {
     if (!americanDate) return "";
     if (!americanDate.includes("-")) return americanDate;
@@ -38,7 +38,7 @@ const Bookpage = () => {
         options={{
           title: book.title, // Dynamic title from book data
           headerStyle: {
-            backgroundColor: theme.colors.secondary, // Your primary color
+            backgroundColor: theme.colors.secondary, // Your primary colorr
           },
           headerTintColor: "white", // Back button and title color
           headerTitleStyle: {
@@ -49,6 +49,7 @@ const Bookpage = () => {
       <ScrollView>
         {/* book details section */}
         <Card
+          mode="contained"
           style={{
             borderRadius: 20,
             width: "95%",
@@ -70,50 +71,8 @@ const Bookpage = () => {
                   borderColor: "white",
                 }}
               />
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  gap: 20,
-                  marginTop: 10,
-                  borderRadius: 10,
-                  padding: 3,
-                  borderWidth: 2,
-                  borderColor: "white",
-                  backgroundColor: theme.colors.secondary,
-                }}
-              >
-                {isBookmarked ? (
-                  <MaterialIcons
-                    name="bookmark"
-                    size={30}
-                    color={theme.colors.blue}
-                    onPress={() => setIsBookmarked(!isBookmarked)}
-                  />
-                ) : (
-                  <MaterialIcons
-                    name="bookmark-border"
-                    size={30}
-                    onPress={() => setIsBookmarked(!isBookmarked)}
-                  />
-                )}
-                {isLiked ? (
-                  <MaterialIcons
-                    name="thumb-up"
-                    size={30}
-                    color={theme.colors.blue}
-                    onPress={() => setIsLiked(!isLiked)}
-                  />
-                ) : (
-                  <MaterialIcons
-                    name="thumb-up-off-alt"
-                    size={30}
-                    onPress={() => setIsLiked(!isLiked)}
-                  />
-                )}
-              </View>
             </View>
-            <View style={{ width: "50%", gap: 10 }}>
+            <View style={{ width: "50%", gap: 10, justifyContent: "space-between" }}>
               <Text variant="titleLarge" style={{ fontWeight: "bold", color: theme.colors.gray }}>
                 {book.title}
               </Text>
@@ -135,6 +94,31 @@ const Bookpage = () => {
                   {book.pageCount} pages
                 </Text>
               </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "flex-end",
+                  gap: 20,
+                  marginTop: 10,
+                }}
+              >
+                {isBookmarked ? (
+                  <MaterialIcons
+                    name="bookmark"
+                    size={34}
+                    color={theme.colors.blue}
+                    onPress={() => setIsBookmarked(!isBookmarked)}
+                  />
+                ) : (
+                  <MaterialIcons
+                    name="bookmark-border"
+                    size={34}
+                    onPress={() => setIsBookmarked(!isBookmarked)}
+                    color={theme.colors.gray}
+                  />
+                )}
+                <AddToFavorites bookData={book} />
+              </View>
             </View>
           </Card.Content>
         </Card>
@@ -152,6 +136,7 @@ const Bookpage = () => {
         </View>
 
         <Card
+          mode="contained"
           style={{
             width: "95%",
             marginHorizontal: "auto",
@@ -167,6 +152,7 @@ const Bookpage = () => {
         </Card>
 
         <Card
+          mode="contained"
           style={{
             width: "95%",
             marginHorizontal: "auto",

@@ -5,6 +5,7 @@ const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [searchInput, setSearchInput] = useState("");
   const [fetchedBooks, setFetchedBooks] = useState([]);
+  const [books, setBooks] = useState([]);
   const [isLiked, setIsLiked] = React.useState(false); //TODO - replace later with live data
   const [isBookmarked, setIsBookmarked] = React.useState(false);
   const [review, setReview] = useState("");
@@ -16,6 +17,8 @@ export const AppProvider = ({ children }) => {
         setSearchInput,
         fetchedBooks,
         setFetchedBooks,
+        books,
+        setBooks,
         isLiked,
         setIsLiked,
         isBookmarked,

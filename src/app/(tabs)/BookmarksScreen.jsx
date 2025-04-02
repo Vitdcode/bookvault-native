@@ -1,15 +1,5 @@
-import { Text, View } from "react-native";
+import BookStatusMenu from "../components/BookStatusMenu";
 
 export default function BookmarksScreen() {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Bookmarks</Text>
-    </View>
-  );
+  return <BookStatusMenu searchTerm="isBookmarked" />;
 }

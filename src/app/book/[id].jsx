@@ -14,6 +14,7 @@ import { Animated, Easing } from "react-native";
 import Fab from "../components/Fab";
 import ReviewButton from "../components/animatedButtons/ReviewButton";
 import AddToFavorites from "../components/functional components/AddToFavorites";
+import AddToBookmarks from "../components/functional components/AddToBookmarks";
 
 const Bookpage = () => {
   const theme = useTheme();
@@ -102,21 +103,7 @@ const Bookpage = () => {
                   marginTop: 10,
                 }}
               >
-                {isBookmarked ? (
-                  <MaterialIcons
-                    name="bookmark"
-                    size={34}
-                    color={theme.colors.blue}
-                    onPress={() => setIsBookmarked(!isBookmarked)}
-                  />
-                ) : (
-                  <MaterialIcons
-                    name="bookmark-border"
-                    size={34}
-                    onPress={() => setIsBookmarked(!isBookmarked)}
-                    color={theme.colors.gray}
-                  />
-                )}
+                <AddToBookmarks bookData={book} />
                 <AddToFavorites bookData={book} />
               </View>
             </View>

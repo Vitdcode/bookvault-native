@@ -3,9 +3,20 @@ import { useAppContext } from "../context/context";
 import handleFetch from "../functional functions_components/fetchBooks";
 import { View, ScrollView, Image, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
+import { useEffect } from "react";
+import bookApis from "../../../api";
 
 export default function SearchScreen() {
-  const { searchInput, setSearchInput, fetchedBooks, setFetchedBooks } = useAppContext();
+  const { searchInput, setSearchInput, fetchedBooks, setFetchedBooks, books, setBooks } =
+    useAppContext();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const booksData = await bookApis.fetchBooks();
+      if (booksData) setBooks(booksData);
+    };
+    fetchData();
+  }, []);
 
   const fetchBooks = async () => {
     const books = await handleFetch(searchInput);

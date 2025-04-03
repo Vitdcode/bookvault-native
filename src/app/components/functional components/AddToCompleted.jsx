@@ -1,11 +1,12 @@
 import { useAppContext } from "../../context/context";
 import { MaterialIcons } from "@expo/vector-icons";
 import toggleProperty from "../../functional functions_components/toggleProperty";
-import { useTheme } from "react-native-paper";
+import { Text, useTheme } from "react-native-paper";
 import { useRouter } from "expo-router";
 import { Button, Icon } from "react-native-paper";
-import { Animated, Easing } from "react-native"; // Import Animated and Easing
+import { Animated, Easing, View } from "react-native"; // Import Animated and Easing
 import { useState, useRef } from "react";
+import bookApis from "../../../../api";
 
 const AddToCompleted = ({ bookData }) => {
   const router = useRouter();
@@ -15,7 +16,38 @@ const AddToCompleted = ({ bookData }) => {
     books.find((book) => book.googleBooksId === bookData.googleBooksId)?.isCompleted || false;
 
   const handleCompletedToggle = () => {
-    toggleProperty(books, setBooks, bookData, "isCompleted", "isBookmarked", "isFavorite", router);
+    let updatedBooks = toggleProperty(
+      books,
+      setBooks,
+      bookData,
+      "isCompleted",
+      "isBookmarked",
+      "isFavorite",
+      router
+    );
+
+    if (!isCompleted) {
+      updatedBooks = updatedBooks?.map((book) =>
+        book.googleBooksId === bookData.googleBooksId
+          ? { ...book, yearCompleted: new Date().getFullYear() }
+          : book
+      );
+    } else {
+      updatedBooks = updatedBooks?.map((book) =>
+        book?.googleBooksId === bookData?.googleBooksId ? { ...book, yearCompleted: "" } : book
+      );
+    }
+    const updatedBook = updatedBooks?.find(
+      (book) => book?.googleBooksId === bookData?.googleBooksId
+    );
+    setBooks(updatedBooks);
+    if (updatedBook) {
+      bookApis.updateProperty(
+        updatedBook.googleBooksId,
+        "yearCompleted",
+        updatedBook?.yearCompleted
+      );
+    }
   };
 
   const animationValue = useRef(new Animated.Value(0)).current; // Animation value (0 to 1)
@@ -39,7 +71,6 @@ const AddToCompleted = ({ bookData }) => {
       mode="contained-tonal"
       buttonColor="rgb(151, 196, 168)"
       onPress={() => {
-        startAnimation();
         handleCompletedToggle();
       }}
       icon={
@@ -74,7 +105,14 @@ const AddToCompleted = ({ bookData }) => {
         fontSize: 15,
       }}
     >
-      {!isCompleted ? "Mark completed" : "Book completed"}
+      {!isCompleted ? (
+        "Mark completed"
+      ) : (
+        <>
+          {startAnimation()}
+          <Text>Book completed</Text>
+        </>
+      )}
     </Button>
   );
 };

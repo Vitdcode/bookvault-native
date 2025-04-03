@@ -7,7 +7,6 @@ const BookStatusMenu = ({ searchTerm }) => {
   const router = useRouter();
   const { books } = useAppContext();
   const filteredArray = books?.filter((book) => book[searchTerm]);
-
   return (
     <ScrollView>
       <View style={{ gap: 20, marginTop: 20 }}>

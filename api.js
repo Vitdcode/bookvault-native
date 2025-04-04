@@ -34,7 +34,6 @@ const bookApis = {
   },
 
   fetchBooks: async () => {
-    console.log(bookApis.apiUrl);
     try {
       const response = await fetch(`${bookApis.apiUrl}/books`);
       bookApis.errorResponse(response);

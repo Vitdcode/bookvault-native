@@ -9,6 +9,7 @@ export const AppProvider = ({ children }) => {
   const [isLiked, setIsLiked] = React.useState(false); //TODO - replace later with live data
   const [isBookmarked, setIsBookmarked] = React.useState(false);
   const [review, setReview] = useState("");
+  const [refreshing, setRefreshing] = useState(false);
 
   return (
     <AppContext.Provider
@@ -25,6 +26,8 @@ export const AppProvider = ({ children }) => {
         setIsBookmarked,
         review,
         setReview,
+        refreshing,
+        setRefreshing,
       }}
     >
       {children}

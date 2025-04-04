@@ -1,14 +1,26 @@
 import { useAppContext } from "../context/context";
-import { Image, ScrollView, View } from "react-native";
-import { Card, Text, TouchableRipple } from "react-native-paper";
+import { Image, RefreshControl, ScrollView, View } from "react-native";
+import { Card, Text, TouchableRipple, useTheme } from "react-native-paper";
 import { useRouter } from "expo-router";
+import onRefresh from "../functional functions_components/refreshApp";
 
-const BookStatusMenu = ({ searchTerm }) => {
+const BookStatusMenu = ({ searchTerm, icon }) => {
+  const theme = useTheme();
   const router = useRouter();
-  const { books } = useAppContext();
+  const { books, refreshing, setBooks, setRefreshing } = useAppContext();
   const filteredArray = books?.filter((book) => book[searchTerm]);
   return (
-    <ScrollView>
+    <ScrollView
+      contentContainerStyle={{ paddingBottom: 90 }}
+      refreshControl={
+        <RefreshControl
+          refreshing={refreshing} // Controls the spinner visibility
+          onRefresh={() => onRefresh(setBooks, setRefreshing)} // Triggered when user pulls down
+          tintColor="#0000ff" // Optional: Spinner color (iOS)
+          colors={[theme.colors.primary]} // Optional: Spinner color (Android)
+        />
+      }
+    >
       <View style={{ gap: 20, marginTop: 20 }}>
         {filteredArray?.map((book) => (
           <Card
@@ -18,8 +30,10 @@ const BookStatusMenu = ({ searchTerm }) => {
               width: "95%",
               marginHorizontal: "auto",
               padding: 10,
+              position: "relative",
             }}
           >
+            {icon}
             <TouchableRipple
               onPress={() => router.push(`/book/${book.googleBooksId}`)}
               rippleColor="rgba(214, 214, 214, 0.32)"

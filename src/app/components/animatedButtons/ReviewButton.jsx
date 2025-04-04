@@ -8,18 +8,28 @@ const ReviewButton = () => {
   return (
     <Button
       mode="contained-tonal"
-      buttonColor="rgb(151, 196, 168)"
+      textColor={theme.colors.textColor}
+      buttonColor={theme.colors.secondary}
       icon={() =>
         !isPressed ? (
-          <MaterialCommunityIcons name="typewriter" size={27} color="white" />
+          <MaterialCommunityIcons
+            name="circle-edit-outline"
+            size={27}
+            color="white"
+            style={{ marginRight: 5 }}
+          />
         ) : (
-          <MaterialCommunityIcons name="content-save-check-outline" size={27} color="white" />
+          <MaterialCommunityIcons
+            name="check-circle"
+            size={27}
+            color="white"
+            style={{ marginRight: 5 }}
+          />
         )
       }
       style={{
         width: 200,
         padding: 6,
-        justifyContent: "center",
         borderRadius: 10,
         borderWidth: 2,
         borderColor: "white",

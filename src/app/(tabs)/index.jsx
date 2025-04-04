@@ -1,21 +1,27 @@
 import { TextInput, Text, TouchableRipple, Searchbar } from "react-native-paper";
 import { useAppContext } from "../context/context";
 import handleFetch from "../functional functions_components/fetchBooks";
-import { View, ScrollView, Image, TouchableOpacity } from "react-native";
+import { View, ScrollView, Image, RefreshControl } from "react-native";
 import { useRouter } from "expo-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import bookApis from "../../../api";
+import fetchBooksPi from "../functional functions_components/fetchBookDataPi";
+import onRefresh from "../functional functions_components/refreshApp";
 
 export default function SearchScreen() {
-  const { searchInput, setSearchInput, fetchedBooks, setFetchedBooks, books, setBooks } =
-    useAppContext();
+  const {
+    searchInput,
+    setSearchInput,
+    fetchedBooks,
+    setFetchedBooks,
+    books,
+    setBooks,
+    refreshing,
+    setRefreshing,
+  } = useAppContext();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const booksData = await bookApis.fetchBooks();
-      if (booksData) setBooks(booksData);
-    };
-    fetchData();
+    fetchBooksPi(setBooks);
   }, []);
 
   const fetchBooks = async () => {
@@ -34,7 +40,17 @@ export default function SearchScreen() {
         onSubmitEditing={fetchBooks}
         returnKeyType="search"
       />
-      <ScrollView style={{ marginBottom: 150 }}>
+      <ScrollView
+        contentContainerStyle={{ paddingBottom: 130 }}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing} // Controls the spinner visibility
+            onRefresh={() => onRefresh(setBooks, setRefreshing)} // Triggered when user pulls down
+            tintColor="#0000ff" // Optional: Spinner color (iOS)
+            colors={["#0000ff"]} // Optional: Spinner color (Android)
+          />
+        }
+      >
         {fetchedBooks.map((book) => (
           <TouchableRipple
             onPress={() => router.push(`/book/${book.googleBooksId}`)}

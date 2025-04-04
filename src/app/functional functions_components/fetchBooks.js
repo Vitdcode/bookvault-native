@@ -1,16 +1,16 @@
 const handleFetch = async (query) => {
   if (!query) return [];
   const apiKey = process.env.EXPO_PUBLIC_API_KEY;
-  const url = `https://www.googleapis.com/books/v1/volumes?q=${query}&langRestrict=en&maxResults=10&key=${apiKey}`;
+  const url = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=20&key=${apiKey}`;
 
   try {
     const response = await fetch(url);
     const data = await response.json();
-
     return (
       data.items
         ?.filter((item) => {
           const info = item.volumeInfo;
+
           return (
             info.description && info.imageLinks?.thumbnail && info.title && info.authors?.length > 0
           );

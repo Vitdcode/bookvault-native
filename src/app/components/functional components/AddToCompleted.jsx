@@ -69,7 +69,8 @@ const AddToCompleted = ({ bookData }) => {
   return (
     <Button
       mode="contained-tonal"
-      buttonColor="rgb(151, 196, 168)"
+      textColor={theme.colors.textColor}
+      buttonColor={theme.colors.secondary}
       onPress={() => {
         handleCompletedToggle();
       }}
@@ -110,7 +111,7 @@ const AddToCompleted = ({ bookData }) => {
       ) : (
         <>
           {startAnimation()}
-          <Text>Book completed</Text>
+          Book completed
         </>
       )}
     </Button>

@@ -8,6 +8,7 @@ const tintColorDark = "#fff";
 
 const Colors = {
   light: {
+    textColor: "rgb(29, 30, 32)",
     primary: "rgb(34, 116, 106)",
     onPrimary: "rgb(255, 255, 255)",
     red: "rgb(219, 85, 85)",
@@ -17,7 +18,7 @@ const Colors = {
     onPrimaryContainer: "rgb(0, 32, 27)",
     secondary: "rgb(149, 195, 166)",
     onSecondary: "rgb(255, 255, 255)",
-    secondaryContainer: "rgb(205, 232, 225)",
+    secondaryContainer: "rgb(209, 224, 220)",
     onSecondaryContainer: "rgb(6, 32, 27)",
     tertiary: "rgb(68, 97, 121)",
     onTertiary: "rgb(255, 255, 255)",
@@ -53,6 +54,7 @@ const Colors = {
     backdrop: "rgba(41, 50, 48, 0.4)",
   },
   dark: {
+    textColor: "rgb(233, 233, 233)",
     primary: "rgb(72, 129, 123)",
     onPrimary: "rgb(0, 55, 48)",
     red: "rgb(219, 85, 85)",

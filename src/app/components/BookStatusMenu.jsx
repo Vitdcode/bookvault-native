@@ -16,7 +16,6 @@ const BookStatusMenu = ({ searchTerm, icon }) => {
         <RefreshControl
           refreshing={refreshing} // Controls the spinner visibility
           onRefresh={() => onRefresh(setBooks, setRefreshing)} // Triggered when user pulls down
-          tintColor="#0000ff" // Optional: Spinner color (iOS)
           colors={[theme.colors.primary]} // Optional: Spinner color (Android)
         />
       }

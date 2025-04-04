@@ -6,10 +6,9 @@ export const AppProvider = ({ children }) => {
   const [searchInput, setSearchInput] = useState("");
   const [fetchedBooks, setFetchedBooks] = useState([]);
   const [books, setBooks] = useState([]);
-  const [isLiked, setIsLiked] = React.useState(false); //TODO - replace later with live data
-  const [isBookmarked, setIsBookmarked] = React.useState(false);
   const [review, setReview] = useState("");
   const [refreshing, setRefreshing] = useState(false);
+  const [reviewBtnIsPressed, setReviewBtnIsPressed] = useState(false);
 
   return (
     <AppContext.Provider
@@ -20,14 +19,12 @@ export const AppProvider = ({ children }) => {
         setFetchedBooks,
         books,
         setBooks,
-        isLiked,
-        setIsLiked,
-        isBookmarked,
-        setIsBookmarked,
         review,
         setReview,
         refreshing,
         setRefreshing,
+        reviewBtnIsPressed,
+        setReviewBtnIsPressed,
       }}
     >
       {children}

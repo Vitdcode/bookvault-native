@@ -2,19 +2,14 @@ import { View, ScrollView, Image, TouchableOpacity } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { useAppContext } from "../context/context";
 import { Text, Button, Icon, Card, useTheme, Portal } from "react-native-paper";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import FavoriteButton from "../components/animatedButtons/FavoriteButton";
-import AnimateIcons from "../components/animatedButtons/AnaimateBetweenIcons";
-import BookMarkButton from "../components/animatedButtons/BookmarkButton";
 import { Stack } from "expo-router";
-import { useRef, useState } from "react";
-import { Animated, Easing } from "react-native";
 import Fab from "../components/Fab";
-import ReviewButton from "../components/animatedButtons/ReviewButton";
+
 import AddToFavorites from "../components/functional components/AddToFavorites";
 import AddToBookmarks from "../components/functional components/AddToBookmarks";
 import AddToCompleted from "../components/functional components/AddToCompleted";
+import ToggleReviewEdit from "../components/functional components/ToggleReviewEdit";
 
 const Bookpage = () => {
   const theme = useTheme();
@@ -118,7 +113,7 @@ const Bookpage = () => {
             alignItems: "center",
           }}
         >
-          <ReviewButton />
+          <ToggleReviewEdit />
           <AddToCompleted bookData={book} />
         </View>
 

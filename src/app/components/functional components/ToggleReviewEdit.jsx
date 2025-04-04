@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Button, Icon, useTheme } from "react-native-paper";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { useAppContext } from "../../context/context";
 
-const ReviewButton = () => {
-  const [isPressed, setIsPressed] = useState(false); // Track button press
+const ToggleReviewEdit = () => {
+  const { reviewBtnIsPressed, setReviewBtnIsPressed } = useAppContext();
+
   const theme = useTheme();
   return (
     <Button
@@ -11,7 +13,7 @@ const ReviewButton = () => {
       textColor={theme.colors.textColor}
       buttonColor={theme.colors.secondary}
       icon={() =>
-        !isPressed ? (
+        !reviewBtnIsPressed ? (
           <MaterialCommunityIcons
             name="circle-edit-outline"
             size={27}
@@ -37,11 +39,11 @@ const ReviewButton = () => {
       labelStyle={{
         fontSize: 15,
       }}
-      onPress={() => setIsPressed(!isPressed)}
+      onPress={() => setReviewBtnIsPressed(!reviewBtnIsPressed)}
     >
-      {!isPressed ? "Write review" : "Save review"}
+      {!reviewBtnIsPressed ? "Write review" : "Save review"}
     </Button>
   );
 };
 
-export default ReviewButton;
+export default ToggleReviewEdit;

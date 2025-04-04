@@ -10,16 +10,20 @@ import AddToFavorites from "../components/functional components/AddToFavorites";
 import AddToBookmarks from "../components/functional components/AddToBookmarks";
 import AddToCompleted from "../components/functional components/AddToCompleted";
 import ToggleReviewEdit from "../components/functional components/ToggleReviewEdit";
+import Review from "../components/Review";
+import { useState } from "react";
 
 const Bookpage = () => {
   const theme = useTheme();
   const { id } = useLocalSearchParams();
   const { fetchedBooks, books } = useAppContext();
-  const { isBookmarked, setIsBookmarked } = useAppContext();
+  /*   const { review, setReview } = useAppContext(); */
 
   const book =
     books.find((b) => b.googleBooksId == id) || fetchedBooks.find((b) => b.googleBooksId === id);
+
   if (!book) return;
+  const [review, setReview] = useState(book.review);
   function convertToMetricDate(americanDate) {
     if (!americanDate) return "";
     if (!americanDate.includes("-")) return americanDate;
@@ -74,7 +78,14 @@ const Bookpage = () => {
               </Text>
               <View style={{ flexDirection: "row", alignItems: "center", gap: "10" }}>
                 <MaterialIcons name="person" size={24} color={theme.colors.blue} />
-                <Text variant="bodyLarge" style={{ color: theme.colors.gray }}>
+                <Text
+                  variant="bodyLarge"
+                  style={{
+                    color: theme.colors.gray,
+                    width: "80%",
+                  }}
+                  numberOfLines={1}
+                >
                   {book.authors.join(", ")}
                 </Text>
               </View>
@@ -113,7 +124,7 @@ const Bookpage = () => {
             alignItems: "center",
           }}
         >
-          <ToggleReviewEdit />
+          <ToggleReviewEdit googleBooksId={book.googleBooksId} review={review} />
           <AddToCompleted bookData={book} />
         </View>
 
@@ -127,9 +138,9 @@ const Bookpage = () => {
         >
           <Card.Content>
             <Text variant="titleLarge" style={{ marginBottom: 10 }}>
-              review
+              Review
             </Text>
-            <Text variant="bodyMedium">This will be a review</Text>
+            <Review review={review} setReview={setReview} />
           </Card.Content>
         </Card>
 

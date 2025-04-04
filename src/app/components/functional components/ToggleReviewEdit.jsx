@@ -2,9 +2,14 @@ import { useState } from "react";
 import { Button, Icon, useTheme } from "react-native-paper";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useAppContext } from "../../context/context";
+import bookApis from "../../../../api";
 
-const ToggleReviewEdit = () => {
+const ToggleReviewEdit = ({ googleBooksId, review }) => {
   const { reviewBtnIsPressed, setReviewBtnIsPressed } = useAppContext();
+
+  const sendReviewToDb = async () => {
+    reviewBtnIsPressed ? bookApis.updateProperty(googleBooksId, "review", review) : null;
+  };
 
   const theme = useTheme();
   return (
@@ -39,7 +44,10 @@ const ToggleReviewEdit = () => {
       labelStyle={{
         fontSize: 15,
       }}
-      onPress={() => setReviewBtnIsPressed(!reviewBtnIsPressed)}
+      onPress={async () => {
+        await sendReviewToDb();
+        setReviewBtnIsPressed(!reviewBtnIsPressed);
+      }}
     >
       {!reviewBtnIsPressed ? "Write review" : "Save review"}
     </Button>

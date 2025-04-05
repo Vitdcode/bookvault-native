@@ -18,6 +18,7 @@ const Bookpage = () => {
   const theme = useTheme();
   const { id } = useLocalSearchParams();
   const { fetchedBooks, books, reviewBtnIsPressed } = useAppContext();
+  const [selection, setSelection] = useState({ start: 0, end: 0 });
 
   const book =
     books.find((b) => b.googleBooksId == id) || fetchedBooks.find((b) => b.googleBooksId === id);
@@ -140,8 +141,20 @@ const Bookpage = () => {
             <Text variant="titleLarge" style={{ marginBottom: 10 }}>
               {!reviewBtnIsPressed ? "Review" : "Edit Review"}
             </Text>
-            {reviewBtnIsPressed && <MarkdownControls review={review} setReview={setReview} />}
-            <Review review={review} setReview={setReview} />
+            {reviewBtnIsPressed && (
+              <MarkdownControls
+                review={review}
+                setReview={setReview}
+                selection={selection}
+                setSelection={setSelection}
+              />
+            )}
+            <Review
+              review={review}
+              setReview={setReview}
+              selection={selection}
+              setSelection={setSelection}
+            />
           </Card.Content>
         </Card>
 

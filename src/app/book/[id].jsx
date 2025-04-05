@@ -13,6 +13,8 @@ import ToggleReviewEdit from "../components/functional components/ToggleReviewEd
 import Review from "../components/Review";
 import { useState } from "react";
 import MarkdownControls from "../components/functional components/MarkdownControls";
+import StarRating from "react-native-star-rating-widget";
+import HandleRating from "../components/functional components/HandleRating";
 
 const Bookpage = () => {
   const theme = useTheme();
@@ -59,7 +61,7 @@ const Bookpage = () => {
           }}
         >
           <Card.Content style={{ flexDirection: "row", gap: 40 }}>
-            <View style={{}}>
+            <View style={{ alignItems: "center", gap: 10 }}>
               <Image
                 source={{ uri: book.coverUrl }}
                 resizeMethod="contain"
@@ -72,8 +74,10 @@ const Bookpage = () => {
                   borderColor: "white",
                 }}
               />
+
+              <HandleRating bookData={book} />
             </View>
-            <View style={{ width: "50%", gap: 10, justifyContent: "space-between" }}>
+            <View style={{ width: "40%", gap: 10, justifyContent: "space-between" }}>
               <Text variant="titleLarge" style={{ fontWeight: "bold", color: theme.colors.gray }}>
                 {book.title}
               </Text>

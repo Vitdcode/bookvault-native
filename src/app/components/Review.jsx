@@ -1,18 +1,17 @@
-import { TextInput } from "react-native-paper";
+import { TextInput, useTheme } from "react-native-paper";
 import { useAppContext, review, setReview } from "../context/context";
-import { Text } from "react-native";
-import { useState } from "react";
+import Markdown from "react-native-markdown-display";
 
 const Review = ({ review, setReview }) => {
   const { reviewBtnIsPressed } = useAppContext();
-  /* const [review, setReview] = useState(reviewText); */
+  const theme = useTheme();
 
   return (
     <>
       {reviewBtnIsPressed ? (
-        <TextInput label="Write review" value={review} onChangeText={setReview} />
+        <TextInput label="Write review" value={review} onChangeText={setReview} multiline={true} />
       ) : (
-        <Text>{review}</Text>
+        <Markdown style={{ text: { color: theme.colors.textColor } }}>{review}</Markdown>
       )}
     </>
   );

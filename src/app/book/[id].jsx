@@ -12,12 +12,12 @@ import AddToCompleted from "../components/functional components/AddToCompleted";
 import ToggleReviewEdit from "../components/functional components/ToggleReviewEdit";
 import Review from "../components/Review";
 import { useState } from "react";
+import MarkdownControls from "../components/functional components/MarkdownControls";
 
 const Bookpage = () => {
   const theme = useTheme();
   const { id } = useLocalSearchParams();
-  const { fetchedBooks, books } = useAppContext();
-  /*   const { review, setReview } = useAppContext(); */
+  const { fetchedBooks, books, reviewBtnIsPressed } = useAppContext();
 
   const book =
     books.find((b) => b.googleBooksId == id) || fetchedBooks.find((b) => b.googleBooksId === id);
@@ -46,7 +46,7 @@ const Bookpage = () => {
           },
         }}
       />
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps="handled">
         {/* book details section */}
         <Card
           mode="contained"
@@ -138,8 +138,9 @@ const Bookpage = () => {
         >
           <Card.Content>
             <Text variant="titleLarge" style={{ marginBottom: 10 }}>
-              Review
+              {!reviewBtnIsPressed ? "Review" : "Edit Review"}
             </Text>
+            {reviewBtnIsPressed && <MarkdownControls review={review} setReview={setReview} />}
             <Review review={review} setReview={setReview} />
           </Card.Content>
         </Card>

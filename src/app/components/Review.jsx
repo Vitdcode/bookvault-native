@@ -33,7 +33,7 @@ const Review = ({ review, setReview, selection, setSelection }) => {
               fontStyle: "italic",
             },
             bullet_list: {
-              color: "white",
+              color: theme.colors.textColor,
             },
           }}
         >

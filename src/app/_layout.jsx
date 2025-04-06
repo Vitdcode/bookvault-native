@@ -1,7 +1,6 @@
 import { Stack } from "expo-router";
 import { AppProvider } from "./context/context";
 import {
-  NavigationContainer,
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
   ThemeProvider,
@@ -12,7 +11,6 @@ import {
   MD3LightTheme,
   PaperProvider,
   adaptNavigationTheme,
-  useTheme,
 } from "react-native-paper";
 import { StatusBar } from "expo-status-bar";
 import Colors from "../constants/Colors";

@@ -9,6 +9,7 @@ export const AppProvider = ({ children }) => {
   const [review, setReview] = useState("");
   const [refreshing, setRefreshing] = useState(false);
   const [reviewBtnIsPressed, setReviewBtnIsPressed] = useState(false);
+  const [statisticsData, setStatisticsData] = useState(null);
 
   return (
     <AppContext.Provider
@@ -25,6 +26,8 @@ export const AppProvider = ({ children }) => {
         setRefreshing,
         reviewBtnIsPressed,
         setReviewBtnIsPressed,
+        statisticsData,
+        setStatisticsData,
       }}
     >
       {children}

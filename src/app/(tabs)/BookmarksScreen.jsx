@@ -4,6 +4,7 @@ import { useTheme } from "react-native-paper";
 
 export default function BookmarksScreen() {
   const theme = useTheme();
+
   return (
     <BookStatusMenu
       searchTerm="isBookmarked"

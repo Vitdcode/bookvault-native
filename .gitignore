@@ -36,4 +36,8 @@ yarn-error.*
 *.tsbuildinfo
 
 app-example
+
+#environment-variables
 .env
+.env.development
+.env.production

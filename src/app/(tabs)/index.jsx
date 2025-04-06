@@ -4,9 +4,9 @@ import handleFetch from "../functional functions_components/fetchBooks";
 import { View, ScrollView, Image, RefreshControl } from "react-native";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import bookApis from "../../../api";
 import fetchBooksPi from "../functional functions_components/fetchBookDataPi";
 import onRefresh from "../functional functions_components/refreshApp";
+import fetchStatistics from "../functional functions_components/fetchStatistics";
 
 export default function SearchScreen() {
   const {
@@ -18,10 +18,13 @@ export default function SearchScreen() {
     setBooks,
     refreshing,
     setRefreshing,
+    statisticsData,
+    setStatisticsData,
   } = useAppContext();
 
   useEffect(() => {
     fetchBooksPi(setBooks);
+    fetchStatistics(setStatisticsData);
   }, []);
 
   const fetchBooks = async () => {
@@ -30,7 +33,6 @@ export default function SearchScreen() {
   };
 
   const router = useRouter();
-
   return (
     <View>
       <TextInput

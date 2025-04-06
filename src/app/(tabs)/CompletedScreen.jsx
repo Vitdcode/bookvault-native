@@ -1,5 +1,4 @@
 import { Picker } from "@react-native-picker/picker";
-import BookStatusMenu from "../components/BookStatusMenu";
 import groupBooksByYear from "../functional functions_components/groupBooksByYear";
 import { useState } from "react";
 import { useAppContext } from "../context/context";
@@ -31,11 +30,12 @@ export default function CompletedScreen() {
     >
       <View
         style={{
-          backgroundColor: theme.colors.secondaryContainer,
+          backgroundColor: theme.colors.pickerColor,
           elevation: 5,
-          borderRadius: 5,
-          /*     borderWidth: 1,
-          borderColor: theme.colors.background, */
+          borderRadius: 20,
+          width: "80%",
+          marginHorizontal: "auto",
+          marginTop: "10",
         }}
       >
         <Picker

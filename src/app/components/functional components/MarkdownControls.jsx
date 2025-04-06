@@ -74,20 +74,16 @@ const MarkdownControls = ({ review, setReview, selection, setSelection }) => {
     <View
       style={{
         flexDirection: "row",
-        backgroundColor: theme.colors.lightGray,
-        flexWrap: "wrap",
-        padding: 8,
-        borderRadius: 10,
         alignItems: "center",
+        justifyContent: "center",
         gap: 10,
-        elevation: 5,
         marginBottom: 10,
       }}
     >
       {buttonControls.map((button, index) => (
         <Button
           mode="contained"
-          buttonColor={theme.colors.blue}
+          buttonColor="rgb(71, 123, 172)"
           key={index}
           onPress={button.onPress}
         >

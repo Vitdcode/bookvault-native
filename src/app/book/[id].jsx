@@ -49,7 +49,10 @@ const Bookpage = () => {
           },
         }}
       />
-      <ScrollView keyboardShouldPersistTaps="handled">
+      <ScrollView
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{ paddingBottom: 110 }}
+      >
         {/* book details section */}
         <Card
           mode="contained"
@@ -61,7 +64,7 @@ const Bookpage = () => {
           }}
         >
           <Card.Content style={{ flexDirection: "row", gap: 40 }}>
-            <View style={{ alignItems: "center", gap: 10 }}>
+            <View style={{ alignItems: "center", gap: 10, width: 190 }}>
               <Image
                 source={{ uri: book.coverUrl }}
                 resizeMethod="contain"
@@ -168,7 +171,7 @@ const Bookpage = () => {
             width: "95%",
             marginHorizontal: "auto",
             marginTop: 20,
-            marginBottom: 90,
+            /*            marginBottom: 90, */
           }}
         >
           <Card.Content>

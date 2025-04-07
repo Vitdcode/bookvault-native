@@ -7,6 +7,7 @@ import { Card, Text, TouchableRipple, useTheme } from "react-native-paper";
 import { useRouter } from "expo-router";
 import onRefresh from "../functional functions_components/refreshApp";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { StarRatingDisplay } from "react-native-star-rating-widget";
 
 export default function CompletedScreen() {
   const router = useRouter();
@@ -74,7 +75,7 @@ export default function CompletedScreen() {
                   rippleColor="rgba(214, 214, 214, 0.32)"
                   key={book.googleBooksId}
                 >
-                  <Card.Content style={{ flexDirection: "row", gap: 20, alignItems: "center" }}>
+                  <Card.Content style={{ flexDirection: "row", gap: 20 }}>
                     <Image
                       source={{ uri: book.coverUrl }}
                       resizeMethod="contain"
@@ -87,9 +88,26 @@ export default function CompletedScreen() {
                         borderColor: "white",
                       }}
                     />
-                    <View style={{ width: "50%", gap: "10" }}>
-                      <Text variant="titleMedium">{book.title}</Text>
-                      <Text variant="bodyMedium">{book.authors.join(", ")}</Text>
+                    <View
+                      style={{
+                        width: "50%",
+                        gap: "10",
+                        justifyContent: "space-around",
+                      }}
+                    >
+                      <View style={{ gap: 10 }}>
+                        <Text variant="titleMedium">{book.title}</Text>
+                        <Text variant="bodyMedium">{book.authors.join(", ")}</Text>
+                      </View>
+
+                      {book.rating && (
+                        <StarRatingDisplay
+                          rating={book.rating || 3}
+                          starSize={24} // Customize star size
+                          color="#FFD700" // Gold color for filled stars
+                          emptyColor="#D3D3D3" // Gray for empty stars
+                        />
+                      )}
                     </View>
                   </Card.Content>
                 </TouchableRipple>

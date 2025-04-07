@@ -11,7 +11,7 @@ const BookStatusMenu = ({ searchTerm, icon }) => {
   const filteredArray = books?.filter((book) => book[searchTerm]);
   return (
     <ScrollView
-      contentContainerStyle={{ paddingBottom: 90 }}
+      contentContainerStyle={{ paddingBottom: 110 }}
       refreshControl={
         <RefreshControl
           refreshing={refreshing} // Controls the spinner visibility

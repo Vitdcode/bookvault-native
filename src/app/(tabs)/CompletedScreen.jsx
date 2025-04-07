@@ -18,7 +18,7 @@ export default function CompletedScreen() {
   if (Object.keys(groupedBooksByYears).length === 0) return;
   return (
     <ScrollView
-      contentContainerStyle={{ paddingBottom: 90 }}
+      contentContainerStyle={{ paddingBottom: 110 }}
       refreshControl={
         <RefreshControl
           refreshing={refreshing} // Controls the spinner visibility

@@ -95,7 +95,6 @@ export default function StatisticsScreen() {
               yAxisLabelPrefix=""
               yAxisTextStyle={{ color: theme.colors.textColor, fontSize: 12, fontWeight: "bold" }}
               xAxisLabelTextStyle={{ color: theme.colors.textColor }}
-              maxValue={10}
               noOfSections={5}
             />
           </Card.Content>

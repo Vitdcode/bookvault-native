@@ -15,6 +15,7 @@ import {
 import { StatusBar } from "expo-status-bar";
 import Colors from "../constants/Colors";
 import merge from "deepmerge";
+import * as SystemUI from "expo-system-ui";
 
 const customLightTheme = { ...MD3LightTheme, colors: Colors.light };
 const customDarkTheme = { ...MD3DarkTheme, colors: Colors.dark };
@@ -32,11 +33,13 @@ export default function RootLayout() {
 
   const paperTheme = colorScheme === "dark" ? CombinedDarkTheme : CombinedDefaultTheme;
 
+  SystemUI.setBackgroundColorAsync(paperTheme.colors.background); //used for applying the same background color when animating to the previous screen with back gesture
+
   return (
     <PaperProvider theme={paperTheme}>
       <ThemeProvider value={paperTheme}>
         <AppProvider>
-          <Stack>
+          <Stack screenOptions={{ animation: "slide_from_right" }}>
             <Stack.Screen name="(tabs)" options={{ headerShown: false, title: "Home Screen" }} />
           </Stack>
           <StatusBar

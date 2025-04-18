@@ -42,3 +42,5 @@ app-example
 .env.development
 .env.production
 eas.json
+android
+app.json

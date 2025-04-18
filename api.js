@@ -1,5 +1,7 @@
+import Constants from "expo-constants";
+
 const bookApis = {
-  apiUrl: process.env.EXPO_PUBLIC_API_URL,
+  apiUrl: Constants.expoConfig.extra.EXPO_PUBLIC_API_URL,
   insertBook: async (book) => {
     if (Object.keys(book).length === 0) return;
     try {

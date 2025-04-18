@@ -16,6 +16,8 @@ import { StatusBar } from "expo-status-bar";
 import Colors from "../constants/Colors";
 import merge from "deepmerge";
 import * as SystemUI from "expo-system-ui";
+import { Appearance } from "react-native";
+import { useEffect } from "react";
 
 const customLightTheme = { ...MD3LightTheme, colors: Colors.light };
 const customDarkTheme = { ...MD3DarkTheme, colors: Colors.dark };
@@ -30,10 +32,15 @@ const CombinedDarkTheme = merge(DarkTheme, customDarkTheme);
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-
   const paperTheme = colorScheme === "dark" ? CombinedDarkTheme : CombinedDefaultTheme;
+  useEffect(() => {
+    const subscription = Appearance.addChangeListener(({ colorScheme }) => {
+      const newTheme = colorScheme === "dark" ? CombinedDarkTheme : CombinedDefaultTheme;
+      SystemUI.setBackgroundColorAsync(paperTheme.colors.background);
+    });
 
-  SystemUI.setBackgroundColorAsync(paperTheme.colors.background); //used for applying the same background color when animating to the previous screen with back gesture
+    return () => subscription.remove(); // Cleanup on unmount
+  }, []);
 
   return (
     <PaperProvider theme={paperTheme}>

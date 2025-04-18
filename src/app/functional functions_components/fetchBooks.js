@@ -1,6 +1,8 @@
+import Constants from "expo-constants";
+
 const handleFetch = async (query) => {
   if (!query) return [];
-  const apiKey = process.env.EXPO_PUBLIC_API_KEY;
+  const apiKey = Constants.expoConfig.extra.EXPO_PUBLIC_API_KEY;
   const url = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=20&key=${apiKey}`;
 
   try {
